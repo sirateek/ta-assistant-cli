@@ -60,5 +60,5 @@ class TaAssistant(TaAssisDisplay):
 
         # Process 2 - Load file
         self.notification("Loading Job list")
-        self.__job_list = JobList(path_to_run)
+        self.__job_list = JobList(path_to_run, self.__job_draft)
         self.__job_list.run()
