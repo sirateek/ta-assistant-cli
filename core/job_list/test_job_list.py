@@ -1,6 +1,6 @@
 import unittest
 import os
-from job_list.job_list import JobList
+from job_list import JobList
 
 
 class test_job_list(unittest.TestCase):
