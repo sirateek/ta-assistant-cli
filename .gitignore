@@ -130,3 +130,6 @@ dmypy.json
 
 # Ignore .DS_Store
 *.DS_Store
+
+# Core Debuger File
+/core/run_core.py
