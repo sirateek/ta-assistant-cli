@@ -1,4 +1,4 @@
-from display_module import display_module
+from display_module.display_module import TaAssisDisplay
 
 
 class TaAssistant(TaAssisDisplay):
