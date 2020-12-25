@@ -6,7 +6,7 @@ class JobList:
     JobList
 
     Return number of zip file in ta dir
-    and student data 
+    and student data
     """
 
     def __init__(self, path_to_run=""):
