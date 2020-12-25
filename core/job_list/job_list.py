@@ -36,6 +36,10 @@ class JobList:
         ex = stu_data[2][:3]
         return stu_id, name, ex
 
+    def split(self, job_draft):
+        list_draft = job_draft["zip_file_draft"].split("{")
+        print(list_draft)
+
     def __count(self):
         filename = self.__read_name()
         self.__work = len(filename)
@@ -59,3 +63,10 @@ class JobList:
     def run(self):
         self.__append_studata()
         self.__count()
+        self.split({'zip_file_draft': '{student_id}_{name}_{ex}.zip', 'output_draft': [
+                   'student_id', 'name', 'ex', 'score1', 'score2', 'comment']})
+
+
+if __name__ == "__main__":
+    job_list = JobList("example_dir/ex1")
+    job_list.run()
