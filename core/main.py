@@ -1,4 +1,5 @@
 from display_module.display_module import TaAssisDisplay
+from job_list.job_list import JobList
 import os
 import sys
 import json
@@ -8,6 +9,7 @@ class TaAssistant(TaAssisDisplay):
     def __init__(self):
         self.__version = "0.1.0"
         self.__job_draft = None
+        self.__job_list = None
 
     def __validate_path(self, path_to_run):
         self.notification("Starting Path validation process")
@@ -55,3 +57,6 @@ class TaAssistant(TaAssisDisplay):
 
         # Process 1 - Validate path
         self.__validate_path(path_to_run)
+        # Process 2 - Load file
+        self.__job_list = JobList(path_to_run)
+        self.__job_list.run()
