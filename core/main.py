@@ -62,3 +62,6 @@ class TaAssistant(TaAssisDisplay):
         self.notification("Loading Job list")
         self.__job_list = JobList(path_to_run, self.__job_draft)
         self.__job_list.run()
+
+        # Process 3 recover App state
+        self.__job_list.check_job_done("example_dir/ex1/ta/job/job.json")
