@@ -8,6 +8,7 @@ import json
 class TaAssistant(TaAssisDisplay):
     def __init__(self):
         self.__job_draft = None
+        self.__job_list = None
 
     def __validate_path(self, path_to_run):
         self.notification("Starting Path validation process")
@@ -52,5 +53,5 @@ class TaAssistant(TaAssisDisplay):
         # Process 1 - Validate path
         self.__validate_path(path_to_run)
         # Process 2 - Load file
-        job_list = JobList(path_to_run)
-        job_list.run()
+        self.__job_list = JobList(path_to_run)
+        self.__job_list.run()
