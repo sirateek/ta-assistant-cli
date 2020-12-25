@@ -12,6 +12,7 @@ class test_job_list(unittest.TestCase):
                 "output_draft": ["student_id", "name", "ex", "score1", "score2", "comment"]
             }
         )
+
         print(os.getenv('TAASSISTANT_RUN_PATH'))
         job_list.run()
         self.assertEqual(job_list.student_data,
