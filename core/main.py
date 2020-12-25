@@ -6,6 +6,7 @@ import json
 
 class TaAssistant(TaAssisDisplay):
     def __init__(self):
+        self.__version = "0.1.0"
         self.__job_draft = None
 
     def __validate_path(self, path_to_run):
@@ -48,5 +49,9 @@ class TaAssistant(TaAssisDisplay):
             self.subnotification("/", validate_name)
 
     def start(self, path_to_run, cli_version):
+        # Process 0 - Welcome user
+        self.title_message(self.__version, cli_version)
+        self.notification("Starting the job on " + path_to_run)
+
         # Process 1 - Validate path
         self.__validate_path(path_to_run)
