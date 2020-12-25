@@ -61,10 +61,4 @@ class TaAssistant(TaAssisDisplay):
         # Process 2 - Load file
         self.notification("Loading Job list")
         self.__job_list = JobList(path_to_run)
-        print(self.__job_draft)
         self.__job_list.run()
-
-
-if __name__ == "__main__":
-    run = TaAssistant()
-    run.start("example_dir/ex1", "0.1.0")

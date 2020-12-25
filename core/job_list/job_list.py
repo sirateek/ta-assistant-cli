@@ -79,10 +79,3 @@ class JobList:
         self.__split()
         self.__append_studata()
         self.__count()
-        print(self.__student_data)
-
-
-if __name__ == "__main__":
-    job_list = JobList("example_dir/ex1", {'zip_file_draft': '{student_id}_{name}_{ex}.zip', 'output_draft': [
-        'student_id', 'name', 'ex', 'score1', 'score2', 'comment']})
-    job_list.run()
