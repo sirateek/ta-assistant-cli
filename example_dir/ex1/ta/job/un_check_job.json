@@ -1,17 +1,1 @@
-{
-    "uncheck_job": [
-      {
-        "file_name": "12345678_test_ex1.zip",
-        "student_id": "12345678",
-        "name": "test",
-        "ex": "ex1"
-      },
-      {
-        "file_name": "12345679_test2_ex1.zip",
-        "student_id": "12345679",
-        "name": "test2",
-        "ex": "ex1"
-      }
-    ]
-  }
-  
+{"Un check job": [{"student_id": "12345678", "name": "test", "ex": "ex1"}, {"student_id": "12345679", "name": "test2", "ex": "ex1"}, {"student_id": "6310546062", "name": "vitvara", "ex": "ex1"}, {"student_id": "6310546063", "name": "vitvara", "ex": "ex1"}, {"student_id": "6310546064", "name": "vitvara", "ex": "ex1"}, {"student_id": "6310546065", "name": "vitvara", "ex": "ex1"}, {"student_id": "6310546066", "name": "vitvara", "ex": "ex1"}]}
