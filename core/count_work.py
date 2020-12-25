@@ -41,8 +41,9 @@ class CountWork:
         filename = self.__read_name()
         stu_data = []
         for i in filename:
+            file_name = i
             stu_id,name,ex = self.__split_name(i)
-            stu_data.append({"student_id":stu_id,"name":name,"ex":ex})
+            stu_data.append({"file_name":file_name,"student_id":stu_id,"name":name,"ex":ex})
     
         self.__student_data["un_check_job"] = stu_data
     
