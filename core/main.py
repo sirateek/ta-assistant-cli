@@ -1,4 +1,5 @@
 from display_module.display_module import TaAssisDisplay
+from count_work import CountWork
 import os
 import sys
 import json
@@ -50,3 +51,6 @@ class TaAssistant(TaAssisDisplay):
     def start(self, path_to_run, cli_version):
         # Process 1 - Validate path
         self.__validate_path(path_to_run)
+        # Process 2 - Load file
+        count_work = CountWork(path_to_run)
+        count_work.run()
