@@ -23,6 +23,6 @@ jobs:
         pip install pytest
     - name: Test with pytest
       env:
-        TAASSISTANT_RUN_PATH: secrets.TAASSISTANT_RUN_PATH
+        TAASSISTANT_RUN_PATH: ${{secrets.TAASSISTANT_RUN_PATH}}
       run: |
         pytest
