@@ -133,3 +133,6 @@ dmypy.json
 
 # Core Debuger File
 /core/run_core.py
+
+# VS Code Configuration
+.vscode/
