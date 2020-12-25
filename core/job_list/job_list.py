@@ -26,6 +26,10 @@ class JobList:
     def student_data(self):
         return self.__student_data
 
+    @property
+    def invalid_file_name(self):
+        return self.__invalid_file_name
+
     def __read_name(self):
         file_name = []
         for file in os.listdir(self.__path_to_run):
