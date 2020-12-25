@@ -15,6 +15,7 @@ class test_job_list(unittest.TestCase):
 
         print(os.getenv('TAASSISTANT_RUN_PATH'))
         job_list.run()
+        print(job_list.student_data)
         self.assertEqual(job_list.student_data,
                          {'run_job': [
                              {'file_name': '6310546066_vitvara_ex1.zip',
