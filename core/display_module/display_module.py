@@ -33,7 +33,7 @@ class TaAssisDisplay:
         print("*" + "="*50 + "*")
         self.notification("Welcome to TA Assistant CLI")
 
-    def report_table(self, report_title, report_data, colList=None):
+    def report_table(self, report_title, report_data):
         """Method for display the report_table to the user
         Note: 1) The report_data must be a list of dict.
               2) The report_table will dynamically adjust the table size related to the inputted report_data
@@ -52,8 +52,8 @@ class TaAssisDisplay:
         """
         self.notification(report_title)
         self.subnotification("i", "Item amounts: " + str(len(report_data)))
-        if not colList:
-            colList = list(report_data[0].keys() if report_data else [])
+
+        colList = list(report_data[0].keys() if report_data else [])
         myList = [colList]
         for item in report_data:
             myList.append([str(item[col] if item[col] is not None else '')
