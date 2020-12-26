@@ -16,7 +16,7 @@ class JobList:
 
         self.__job_done = {}
         self.__work = 0
-        self.__student_data = {"un_run_job": []}
+        self.__student_data = {"run_job": []}
         self.__invalid_file_name = []
         self.__key_list = []
         self.__split_list = []
@@ -95,7 +95,7 @@ class JobList:
             for j, k in zip(self.__split_name(i), self.__key_list):
                 person_data[k] = j
             stu_data.append(person_data)
-        self.__student_data["un_run_job"] = stu_data
+        self.__student_data["run_job"] = stu_data
 
     def write_json(self, path):
         with open(path, "w") as filehandel:
@@ -114,10 +114,10 @@ class JobList:
         self.__read_done_stu(job_file)
         job_list = self.__job_done["run_job"]
         for done_stu in job_list:
-            for stu in self.__student_data["un_run_job"]:
+            for stu in self.__student_data["run_job"]:
                 if done_stu["student_id"] == stu["student_id"]:
-                    self.__rated_student.append(self.__student_data["un_run_job"].pop(
-                        self.__student_data["un_run_job"].index(stu)))
+                    self.__rated_student.append(self.__student_data["run_job"].pop(
+                        self.__student_data["run_job"].index(stu)))
 
 
 if __name__ == "__main__":
