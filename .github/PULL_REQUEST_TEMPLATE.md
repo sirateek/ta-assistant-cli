@@ -8,10 +8,6 @@
 
 \_Replace this paragraph with a description of what you are removing in this pr.
 
-## Related Issues
-
-\_Replace this paragraph with a list of issues related to this PR.
-
 ## Tests
 
 I added the following tests:
