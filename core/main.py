@@ -1,4 +1,5 @@
 from display_module.display_module import TaAssisDisplay
+from display_module.menu import Menu
 from job_list.job_list import JobList
 import os
 import sys
@@ -11,6 +12,7 @@ class TaAssistant(TaAssisDisplay):
         self.__job_draft = None
         self.__job_file = None
         self.__job_list = None
+        self.__is_accept_job_list = False
 
     def __validate_path(self, path_to_run):
         self.notification("Starting Path validation process")
@@ -54,6 +56,31 @@ class TaAssistant(TaAssisDisplay):
             self.__job_file = json.load(jobFile)
             self.subnotification("/", validate_name)
 
+    def __trigger_accept_attribute(self):
+        self.__is_accept_job_list = True
+
+    def __decline_job_list(self):
+        self.failure("You've decline the job list. Stopping the process.")
+        sys.exit(1)
+
+    def __ask_user_to_accept_job_list(self):
+        accept_job_menu = Menu({
+            "a": ("Accept", lambda: self.__trigger_accept_attribute()),
+            "d": ("Decline", lambda: self.__decline_job_list()),
+            "j": ("JobList", lambda: self.report_table("Job List", self.__job_list.student_data["run_job"])),
+            "u": ("UnknownList", lambda: self.report_table("Unknown file Result",
+                                                           [{"file_name": item}
+                                                               for item in self.__job_list.invalid_file_name]
+                                                           ))
+        })
+        print("")
+        self.notification(
+            "Please review the job list result and accept to continue")
+        while not self.__is_accept_job_list:
+            accept_job_menu.pick()
+        self.notification(
+            "You've accepted the job list. Starting the job process now.")
+
     def start(self, path_to_run, cli_version):
         # Process 0 - Welcome user
         self.title_message(self.__version, cli_version)
@@ -67,5 +94,9 @@ class TaAssistant(TaAssisDisplay):
         self.__job_list = JobList(path_to_run, self.__job_draft)
         self.__job_list.run()
 
-        # Process 3 recover App state
+        # Process 3 - recover App state
         self.__job_list.check_job_done(self.__job_file)
+        self.subnotification("/", "Job list load successfully")
+
+        # Process 4 - Print the result and ask for job confirmation
+        self.__ask_user_to_accept_job_list()

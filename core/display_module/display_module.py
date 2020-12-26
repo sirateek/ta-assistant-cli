@@ -4,6 +4,10 @@ class TaAssisDisplay:
         print("(*) " + text)
 
     @staticmethod
+    def input_from_user(text):
+        return input("(?) " + text)
+
+    @staticmethod
     def subnotification(status, text):
         print(" |-({}) {}".format(status, text))
 
@@ -18,3 +22,20 @@ class TaAssisDisplay:
                                 core_version + " CLI Ver: " + cli_version))
         print("*" + "="*50 + "*")
         self.notification("Welcome to TA Assistant CLI")
+
+    def report_table(self, report_title, report_data, colList=None):
+        self.notification(report_title)
+        self.subnotification("i", "Item amounts: " + str(len(report_data)))
+        if not colList:
+            colList = list(report_data[0].keys() if report_data else [])
+        myList = [colList]
+        for item in report_data:
+            myList.append([str(item[col] if item[col] is not None else '')
+                           for col in colList])
+        colSize = [max(map(len, col)) for col in zip(*myList)]
+        formatStr = ' | '.join(["{{:<{}}}".format(i) for i in colSize])
+        myList.insert(0, ['-' * i for i in colSize])
+        myList.insert(2, ['-' * i for i in colSize])
+        myList.append(['-' * i for i in colSize])
+        for item in myList:
+            print(formatStr.format(*item))
