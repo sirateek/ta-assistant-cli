@@ -1,4 +1,5 @@
 import os
+import json
 
 
 class JobList:
@@ -10,13 +11,16 @@ class JobList:
     """
 
     def __init__(self, path_to_run="", job_draft=""):
-        self.__work = 0
-        self.__student_data = {"run_job": []}
         self.__path_to_run = path_to_run
         self.__job_draft = job_draft
+
+        self.__job_done = {}
+        self.__work = 0
+        self.__student_data = {"run_job": []}
         self.__invalid_file_name = []
         self.__key_list = []
         self.__split_list = []
+        self.__rated_student = []
 
     @property
     def work(self):
@@ -29,6 +33,10 @@ class JobList:
     @property
     def invalid_file_name(self):
         return self.__invalid_file_name
+
+    @property
+    def rated_student(self):
+        return self.__rated_student
 
     def __read_name(self):
         file_name = []
@@ -90,7 +98,6 @@ class JobList:
         self.__student_data["run_job"] = stu_data
 
     def write_json(self, path):
-        import json
         with open(path, "w") as filehandel:
             json.dump(self.__student_data, filehandel)
 
@@ -99,8 +106,23 @@ class JobList:
         self.__append_studata()
         self.__count()
 
+    def __read_done_stu(self, job_file):
+        with open(job_file, "r") as filehandel:
+            self.__job_done = json.load(filehandel)
+
+    def check_job_done(self, job_file):
+        self.__read_done_stu(job_file)
+        job_list = self.__job_done["run_job"]
+        for done_stu in job_list:
+            for stu in self.__student_data["run_job"]:
+                if done_stu["student_id"] == stu["student_id"]:
+                    self.__rated_student.append(self.__student_data["run_job"].pop(
+                        self.__student_data["run_job"].index(stu)))
+
 
 if __name__ == "__main__":
     run = JobList("example_dir/ex1", {"zip_file_draft": "{student_id}_{name}_{ex}.zip",
                                       "output_draft": ["student_id", "name", "ex", "score1", "score2", "comment"]})
     run.run()
+    run.check_job_done("example_dir/ex1/ta/job/job.json")
+    print(run.rated_student)
