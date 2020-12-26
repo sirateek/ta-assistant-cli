@@ -1,7 +1,7 @@
 class TaAssisDisplay:
     @staticmethod
-    def notification(text):
-        print("(*) " + text)
+    def notification(text, notification_icon=None):
+        print("({}) ".format(notification_icon or "*") + text)
 
     @staticmethod
     def input_from_user(text):

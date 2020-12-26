@@ -88,9 +88,11 @@ class TaAssistant(TaAssisDisplay):
                                                            [{"file_name": item}
                                                                for item in self.__job_list.invalid_file_name]
                                                            )),
-            "z": ("Zip File Draft", lambda: self.notification(self.__job_draft["zip_file_draft"])),
-            "o": ("Output Draft", lambda: self.notification(str(self.__job_draft["output_draft"])))
-        })
+            "z": ("Zip File Draft", lambda: self.notification("Zip File Draft: " + self.__job_draft["zip_file_draft"], "i")),
+            "o": ("Output Draft", lambda: self.notification("Output Draft: " + str(self.__job_draft["output_draft"]), "i"))
+        },
+            "Review Job list menu"
+        )
         print("")
         self.notification(
             "Please review the job list result and accept to continue")
