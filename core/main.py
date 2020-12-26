@@ -68,4 +68,4 @@ class TaAssistant(TaAssisDisplay):
         self.__job_list.run()
 
         # Process 3 recover App state
-        self.__job_list.check_job_done(path_to_run+"/ta/job/job.json")
+        self.__job_list.check_job_done(self.__job_file)
