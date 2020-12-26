@@ -1,5 +1,6 @@
 from display_module.display_module import TaAssisDisplay
 from job_list.job_list import JobList
+from zipfile import ZipFile
 import os
 import sys
 import json
@@ -64,4 +65,9 @@ class TaAssistant(TaAssisDisplay):
         self.__job_list.run()
 
         # Process 3 recover App state
-        self.__job_list.check_job_done("example_dir/ex1/ta/job/job.json")
+        self.__job_list.check_job_done(path_to_run+"/ta/job/job.json")
+
+
+if __name__ == "__main__":
+    test = TaAssistant()
+    test.start("example_dir/ex1", "0.1.0")
