@@ -9,6 +9,7 @@ class TaAssistant(TaAssisDisplay):
     def __init__(self):
         self.__version = "0.1.0"
         self.__job_draft = None
+        self.__job_file = None
         self.__job_list = None
 
     def __validate_path(self, path_to_run):
@@ -45,9 +46,12 @@ class TaAssistant(TaAssisDisplay):
         validate_name = "Validate Job File (`/ta/job/job.json`)"
         if not os.path.isfile(path_to_run + "/ta/job/job.json"):
             jobFile = open(path_to_run + "/ta/job/job.json", "w")
-            json.dump({}, jobFile)
+            json.dump({"run_job": []}, jobFile)
+            self.__job_file = {"run_job": []}
             self.subnotification("C", validate_name)
         else:
+            jobFile = open(path_to_run + "/ta/job/job.json", "r")
+            self.__job_file = json.load(jobFile)
             self.subnotification("/", validate_name)
 
     def start(self, path_to_run, cli_version):
@@ -64,4 +68,4 @@ class TaAssistant(TaAssisDisplay):
         self.__job_list.run()
 
         # Process 3 recover App state
-        self.__job_list.check_job_done("example_dir/ex1/ta/job/job.json")
+        self.__job_list.check_job_done(self.__job_file)
