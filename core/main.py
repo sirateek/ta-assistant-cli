@@ -71,7 +71,9 @@ class TaAssistant(TaAssisDisplay):
             "u": ("UnknownList", lambda: self.report_table("Unknown file Result",
                                                            [{"file_name": item}
                                                                for item in self.__job_list.invalid_file_name]
-                                                           ))
+                                                           )),
+            "z": ("Zip File Draft", lambda: self.notification(self.__job_draft["zip_file_draft"])),
+            "o": ("Output Draft", lambda: self.notification(str(self.__job_draft["output_draft"])))
         })
         print("")
         self.notification(
