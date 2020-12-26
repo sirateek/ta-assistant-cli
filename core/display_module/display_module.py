@@ -1,21 +1,31 @@
 class TaAssisDisplay:
     @staticmethod
     def notification(text, notification_icon=None):
+        """Method for displaying the notificaiton to user
+        """
         print("({}) ".format(notification_icon or "*") + text)
 
     @staticmethod
     def input_from_user(text):
+        """Method for input the user_input
+        """
         return input("(?) " + text)
 
     @staticmethod
     def subnotification(status, text):
+        """Method for displaying the sub-notification to user
+        """
         print(" |-({}) {}".format(status, text))
 
     @staticmethod
     def failure(text):
+        """Method for displaying the failure-notification to user
+        """
         print("(!!) " + text)
 
     def title_message(self, core_version, cli_version):
+        """Method for displaying the welcome message to user
+        """
         print("*" + "="*50 + "*")
         print("|{:^50}|".format("TA Assistant CLI"))
         print("|{:^50}|".format("Core Ver: " +
@@ -24,6 +34,22 @@ class TaAssisDisplay:
         self.notification("Welcome to TA Assistant CLI")
 
     def report_table(self, report_title, report_data, colList=None):
+        """Method for display the report_table to the user
+        Note: 1) The report_data must be a list of dict.
+              2) The report_table will dynamically adjust the table size related to the inputted report_data
+
+        Data Structure `report_data`:
+        [
+            {
+                "name": "a",
+                "score": "1"
+            },
+            {
+                "name": "a",
+                "score": "1"
+            }
+        ]
+        """
         self.notification(report_title)
         self.subnotification("i", "Item amounts: " + str(len(report_data)))
         if not colList:
