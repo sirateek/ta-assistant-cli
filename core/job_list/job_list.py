@@ -14,7 +14,6 @@ class JobList:
         self.__path_to_run = path_to_run
         self.__job_draft = job_draft
 
-        self.__job_done = {}
         self.__work = 0
         self.__student_data = {"run_job": []}
         self.__invalid_file_name = []
@@ -106,13 +105,8 @@ class JobList:
         self.__append_studata()
         self.__count()
 
-    def __read_done_stu(self, job_file):
-        with open(job_file, "r") as filehandel:
-            self.__job_done = json.load(filehandel)
-
     def check_job_done(self, job_file):
-        self.__read_done_stu(job_file)
-        job_list = self.__job_done["run_job"]
+        job_list = job_file["run_job"]
         for done_stu in job_list:
             for stu in self.__student_data["run_job"]:
                 if done_stu["student_id"] == stu["student_id"]:
