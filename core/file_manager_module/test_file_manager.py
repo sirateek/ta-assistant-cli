@@ -4,7 +4,7 @@ import unittest
 import os
 
 
-class TestUnZip(unittest.TestCase):
+class TestFileManager(unittest.TestCase):
     def test_del_extract(self):
         test_case = []
         predict_case = []
@@ -24,7 +24,7 @@ class TestUnZip(unittest.TestCase):
         path_to_run = os.environ["PWD"] + "/test"
         unzip = FileManager()
         unzip.unzip("Test.zip", "test_file_manager", path_to_run)
-        for file in os.listdir(path_to_run+"test_file_manager/ta/cache/"+"Test"):
+        for file in os.listdir(path_to_run+"/test_file_manager/ta/cache/"+"Test"):
             if file.endswith(".txt"):
                 test_case.append(str(file))
         self.assertEqual(test_case, predict_case)
