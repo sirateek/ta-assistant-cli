@@ -6,7 +6,7 @@ import shutil
 class FileManager:
 
     @staticmethod
-    def unzip(file_name, exdirname, path_to_run):
+    def unzip(path_to_run, exdirname, file_name):
         """[UnZip]
 
         Args:
@@ -22,7 +22,7 @@ class FileManager:
                               "/"+"/ta/cache/"+file_name[:-4])
 
     @staticmethod
-    def del_extract(path_to_run, dirname, exdirname):
+    def del_extract(path_to_run, exdirname, dirname):
         """[delete directory]
             delete extracted file
         Args:
