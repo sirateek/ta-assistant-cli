@@ -14,7 +14,7 @@ class JobList:
         """
         Args:
             path_to_run (str): path to run
-            job_draft (str): job_draft.json              
+            job_draft (str): job_draft.json
         """
         self.__path_to_run = path_to_run
         self.__job_draft = job_draft
@@ -58,7 +58,7 @@ class JobList:
         """[rated student]
 
         Returns:
-            list : list of student that has been rated     
+            list : list of student that has been rated
         """
         return self.__rated_student
 
