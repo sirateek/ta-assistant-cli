@@ -109,6 +109,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+# Test dir by test file manager
+test/test_file_manager/ta/cache/Test
 
 # Spyder project settings
 .spyderproject
