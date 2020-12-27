@@ -1,6 +1,5 @@
 from display_module.display_module import TaAssisDisplay
 from job_list.job_list import JobList
-from zipfile import ZipFile
 import os
 import sys
 import json
