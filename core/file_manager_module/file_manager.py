@@ -5,7 +5,8 @@ import shutil
 
 class FileManager:
 
-    def unzip(self, file_name, exdirname, path_to_run):
+    @staticmethod
+    def unzip(file_name, exdirname, path_to_run):
         """[UnZip]
 
         Args:
@@ -20,7 +21,8 @@ class FileManager:
             zipObj.extractall(path_to_run+"/"+exdirname +
                               "/"+"/ta/cache/"+file_name[:-4])
 
-    def del_extract(self, path_to_run, dirname, exdirname):
+    @staticmethod
+    def del_extract(path_to_run, dirname, exdirname):
         """[delete directory]
             delete extracted file
         Args:
