@@ -176,11 +176,3 @@ class JobList:
                 if done_stu["student_id"] == stu["student_id"]:
                     self.__rated_student.append(self.__student_data["run_job"].pop(
                         self.__student_data["run_job"].index(stu)))
-
-
-if __name__ == "__main__":
-    run = JobList("example_dir/ex1", {"zip_file_draft": "{student_id}_{name}_{ex}.zip",
-                                      "output_draft": ["student_id", "name", "ex", "score1", "score2", "comment"]})
-    run.run()
-    run.check_job_done("example_dir/ex1/ta/job/job.json")
-    print(run.rated_student)
