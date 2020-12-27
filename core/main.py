@@ -1,4 +1,5 @@
 from display_module.display_module import TaAssisDisplay
+from display_module.menu import Menu
 from job_list.job_list import JobList
 import os
 import sys
@@ -8,11 +9,20 @@ import json
 class TaAssistant(TaAssisDisplay):
     def __init__(self):
         self.__version = "0.1.0"
+        # Keep the loaded job draft file info.
+        # (/ta/draft/draft.json)
         self.__job_draft = None
+        # Keep the loaded job file info.
+        # (/ta/job/job.json)
         self.__job_file = None
+        # Hold the JobList Object
         self.__job_list = None
+        # Hold the value to tell that user accept the loaded job list
+        self.__is_accept_job_list = False
 
     def __validate_path(self, path_to_run):
+        """Path validation process (Process 1)
+        """
         self.notification("Starting Path validation process")
 
         # Validate path_to_run
@@ -54,6 +64,43 @@ class TaAssistant(TaAssisDisplay):
             self.__job_file = json.load(jobFile)
             self.subnotification("/", validate_name)
 
+    def __trigger_accept_attribute(self):
+        """Method to trigger the is_accept_job_list value to True
+        """
+        self.__is_accept_job_list = True
+
+    def __decline_job_list(self):
+        """Method to use when user decline the loaded job list
+        Note: It used to print the failure message and call exit with code 1
+        """
+        self.failure("You've decline the job list. Stopping the process.")
+        sys.exit(1)
+
+    def __ask_user_to_accept_job_list(self):
+        """Method to ask the user to review the loaded job list
+        """
+        # the ask user menu
+        accept_job_menu = Menu({
+            "a": ("Accept", lambda: self.__trigger_accept_attribute()),
+            "d": ("Decline", lambda: self.__decline_job_list()),
+            "j": ("JobList", lambda: self.report_table("Job List", self.__job_list.student_data["run_job"])),
+            "u": ("UnknownList", lambda: self.report_table("Unknown file Result",
+                                                           [{"file_name": item}
+                                                               for item in self.__job_list.invalid_file_name]
+                                                           )),
+            "z": ("Zip File Draft", lambda: self.notification("Zip File Draft: " + self.__job_draft["zip_file_draft"], "i")),
+            "o": ("Output Draft", lambda: self.notification("Output Draft: " + str(self.__job_draft["output_draft"]), "i"))
+        },
+            "Review Job list menu"
+        )
+        print("")
+        self.notification(
+            "Please review the job list result and accept to continue")
+        while not self.__is_accept_job_list:
+            accept_job_menu.pick()
+        self.notification(
+            "You've accepted the job list. Starting the job process now.")
+
     def start(self, path_to_run, cli_version):
         # Process 0 - Welcome user
         self.title_message(self.__version, cli_version)
@@ -67,6 +114,9 @@ class TaAssistant(TaAssisDisplay):
         self.__job_list = JobList(path_to_run, self.__job_draft)
         self.__job_list.run()
 
-        # Process 3 recover App state
+        # Process 3 - recover App state
+        self.__job_list.check_job_done(self.__job_file)
+        self.subnotification("/", "Job list load successfully")
 
-        self.__job_list.check_job_done(path_to_run+"/ta/job/job.json")
+        # Process 4 - Print the result and ask for job confirmation
+        self.__ask_user_to_accept_job_list()

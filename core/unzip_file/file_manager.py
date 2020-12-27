@@ -18,7 +18,7 @@ class FileManager:
         """
         with ZipFile(path_to_run+"/"+exdirname+"/"+file_name, "r") as zipObj:
             zipObj.extractall(path_to_run+"/"+exdirname +
-                              "/"+"/ta/cashe/"+file_name[:-4])
+                              "/"+"/ta/cache/"+file_name[:-4])
 
     def del_extract(self, path_to_run, dirname, exdirname):
         """[delete directory]
@@ -31,6 +31,6 @@ class FileManager:
         Remove:
             dirname
         """
-        shutil.rmtree(path_to_run+"/"+exdirname+"/ta/cashe/"+dirname)
+        shutil.rmtree(path_to_run+"/"+exdirname+"/ta/cache/"+dirname)
 
         print("Directory" + str(dirname) + "Removed")

@@ -11,6 +11,11 @@ class JobList:
     """
 
     def __init__(self, path_to_run="", job_draft=""):
+        """
+        Args:
+            path_to_run (str): path to run
+            job_draft (str): job_draft.json
+        """
         self.__path_to_run = path_to_run
         self.__job_draft = job_draft
 
@@ -23,21 +28,46 @@ class JobList:
 
     @property
     def work(self):
+        """[work]
+
+        Returns:
+            int : amount or work
+        """
         return self.__work
 
     @property
     def student_data(self):
+        """[student data]
+
+        Returns:
+            dict(.json): dictionary of student data that keep | the following the given draft.json [zip_file_draft]
+        """
         return self.__student_data
 
     @property
     def invalid_file_name(self):
+        """[invalid file name]
+
+        Returns:
+            list : list of the file.zip with the name is invalid
+        """
         return self.__invalid_file_name
 
     @property
     def rated_student(self):
+        """[rated student]
+
+        Returns:
+            list : list of student that has been rated
+        """
         return self.__rated_student
 
     def __read_name(self):
+        """[read name]
+
+        Returns:
+            list : list of full name of given file in exercise directory
+        """
         file_name = []
         for file in os.listdir(self.__path_to_run):
             if file.endswith(".zip"):
@@ -45,6 +75,15 @@ class JobList:
         return file_name
 
     def __check_file_name(self, stu_data, file_name):
+        """[check file name]
+
+        Args:
+            stu_data (list): dictionary of student data that keep | the following the given draft.json [zip_file_draft]
+            file_name (string): name of the file to be check
+
+        Returns:
+            bool : if the are not following the given draft return false
+        """
         for i in stu_data:
             if ".zi" in i:
                 self.__invalid_file_name.append(file_name)
@@ -56,6 +95,14 @@ class JobList:
         return True
 
     def __split_name(self, file_name):
+        """[split name]
+            split file so it can be classification
+        Args:
+            file_name (string): file name that you want to seperate
+
+        Returns:
+            list : list of string that following that draft.json (zip_file_draft)
+        """
         split_list = self.__split_list
         stu_data = []
         for i in split_list:
@@ -66,6 +113,9 @@ class JobList:
         return stu_data
 
     def __split(self):
+        """[split]
+        Analyze what the sample is given, what keys, and what classifications are required
+        """
         key_list = []
         split_list = []
         zip_draft = self.__job_draft["zip_file_draft"]
@@ -80,10 +130,16 @@ class JobList:
         self.__split_list = split_list
 
     def __count(self):
+        """[count]
+        count amount of work and keep it in self.__work
+        """
         filename = self.__read_name()
         self.__work = len(filename)
 
     def __append_studata(self):
+        """[append student data]
+        put the information that has been categorized into the list/json (self.__student_data)
+        """
         filename = self.__read_name()
         stu_data = []
         for i in filename:
@@ -96,16 +152,17 @@ class JobList:
             stu_data.append(person_data)
         self.__student_data["run_job"] = stu_data
 
-    def write_json(self, path):
-        with open(path, "w") as filehandel:
-            json.dump(self.__student_data, filehandel)
-
     def run(self):
         self.__split()
         self.__append_studata()
         self.__count()
 
     def check_job_done(self, job_file):
+        """[check job done]
+        check that which student have been rated and remove them form self.__student_data
+        Args:
+            job_file (job.json): list of student that has been rated
+        """
         job_list = job_file["run_job"]
         for done_stu in job_list:
             for stu in self.__student_data["run_job"]:
