@@ -15,13 +15,6 @@ class JobList:
         Args:
             path_to_run (str): path to run
             job_draft (str): job_draft.json
-
-        Attributes:
-            self.__work : 
-            self.__student_data : 
-            self.__key_list : this valuable hold key that draft.json [zip_file_draft] provided
-            self.__split_list : keep string that are used for classification
-            self.__rated_student :              
         """
         self.__path_to_run = path_to_run
         self.__job_draft = job_draft
@@ -65,7 +58,7 @@ class JobList:
         """[rated student]
 
         Returns:
-            list : list of student that has been rated     
+            list : list of student that has been rated
         """
         return self.__rated_student
 
