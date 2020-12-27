@@ -69,13 +69,10 @@ class TaAssistant(TaAssisDisplay):
         self.__job_list.run()
 
         # Process 3 recover App state
-<<<<<<< HEAD
-        self.__job_list.check_job_done(path_to_run+"/ta/job/job.json")
+
+        self.__job_list.check_job_done(self.__job_file)
 
 
 if __name__ == "__main__":
     test = TaAssistant()
     test.start("example_dir/ex1", "0.1.0")
-=======
-        self.__job_list.check_job_done(self.__job_file)
->>>>>>> 44330c0e527d9153468331b9539fb32a23d88019
