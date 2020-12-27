@@ -10,9 +10,9 @@ class TestFileManager(unittest.TestCase):
         predict_case = []
         path_to_run = os.environ["PWD"]+"/test"
         unzip = FileManager()
-        unzip.unzip("Test.zip", "test_file_manager", path_to_run)
+        unzip.unzip(path_to_run, "test_file_manager", "Test.zip")
         rmdir = FileManager()
-        rmdir.del_extract(path_to_run, "Test", "test_file_manager")
+        rmdir.del_extract(path_to_run, "test_file_manager", "Test")
         for file in os.listdir(path_to_run+"/test_file_manager/ta/cache"):
             if file == "Test":
                 test_case.append(str(file))
@@ -23,7 +23,7 @@ class TestFileManager(unittest.TestCase):
         predict_case = ["test.txt"]
         path_to_run = os.environ["PWD"] + "/test"
         unzip = FileManager()
-        unzip.unzip("Test.zip", "test_file_manager", path_to_run)
+        unzip.unzip(path_to_run, "test_file_manager", "Test.zip")
         for file in os.listdir(path_to_run+"/test_file_manager/ta/cache/"+"Test"):
             if file.endswith(".txt"):
                 test_case.append(str(file))
