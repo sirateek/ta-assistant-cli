@@ -61,7 +61,7 @@ class JobList:
         ]
 
         Returns:
-            list : List of the job object that has already been run. 
+            list : List of the job object that has already been run.
         """
         return self.__jobs_run
 
