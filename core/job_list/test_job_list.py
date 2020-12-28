@@ -1,7 +1,6 @@
 from job_list import JobList
 import unittest
 import os
-import sys
 
 
 class test_job_list(unittest.TestCase):
