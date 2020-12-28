@@ -18,22 +18,11 @@ class JobList:
         """
         self.__path_to_run = path_to_run
         self.__job_draft = job_draft
-
-        self.__work = 0
         self.__student_data = {"run_job": []}
         self.__invalid_file_name = []
         self.__key_list = []
         self.__split_list = []
         self.__rated_student = []
-
-    @property
-    def work(self):
-        """[work]
-
-        Returns:
-            int : amount or work
-        """
-        return self.__work
 
     @property
     def student_data(self):
@@ -129,13 +118,6 @@ class JobList:
         self.__key_list = key_list
         self.__split_list = split_list
 
-    def __count(self):
-        """[count]
-        count amount of work and keep it in self.__work
-        """
-        filename = self.__read_name()
-        self.__work = len(filename)
-
     def __append_studata(self):
         """[append student data]
         put the information that has been categorized into the list/json (self.__student_data)
@@ -155,7 +137,6 @@ class JobList:
     def run(self):
         self.__split()
         self.__append_studata()
-        self.__count()
 
     def check_job_done(self, job_file):
         """[check job done]
