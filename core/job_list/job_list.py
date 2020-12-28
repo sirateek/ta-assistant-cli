@@ -162,13 +162,6 @@ class JobList:
         for item in intersect_list:
             self.__jobs.pop(self.__jobs.index(item))
 
-        # # Check the equality of the jobs_run in job list
-        # for self.__jobs_run in jobs_list:
-        #     for job_from_jobs in self.__jobs:
-        #         if job_from_jobs == job_from_job_file["file_name"]:
-        #             self.__rated_student.append(self.__student_data["run_job"].pop(
-        #                 self.__student_data["run_job"].index(stu)))
-
     def load_jobs(self, job_file):
         key_list, split_list = self.__split()
         self.__read_jobs_from_dir(key_list, split_list)
