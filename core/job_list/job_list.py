@@ -175,6 +175,7 @@ class Job:
         """
         self.__file_name = file_name
         self.__job_vars = job_vars
+        self.__is_run = False
 
     def generate_dict_report(self):
         dict_data = {
@@ -182,6 +183,9 @@ class Job:
         }
         dict_data.update(self.__job_vars)
         return dict_data
+
+    def toggle_is_run(self):
+        self.__is_run = True
 
     def __eq__(self, compare):
         """The descript the Equality of the object
@@ -191,6 +195,13 @@ class Job:
 
     def __hash__(self):
         return hash(str(self))
+
+    @property
+    def is_run(self):
+        """The Property to prevent non-successfully job to be written in the Job File (job.json)
+        """
+        # The Property of is_run attribute
+        return self.__is_run
 
     @property
     def file_name(self):
