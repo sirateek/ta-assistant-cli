@@ -93,7 +93,7 @@ class JobList:
                 return False
             for j in split_list:
                 if j in i:
-                    self.__invalid_file_name.append(file_name)
+                    self.__unknown_files.append(file_name)
                     return False
         return True
 
