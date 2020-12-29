@@ -93,7 +93,7 @@ class JobList:
                 return False
             for j in split_list:
                 if j in i:
-                    self.__invalid_file_name.append(file_name)
+                    self.__unknown_files.append(file_name)
                     return False
         return True
 
@@ -122,7 +122,7 @@ class JobList:
         split_list = []
         zip_draft = self.__job_draft["zip_file_draft"]
         n = zip_draft.count("}")
-        for i in range(n):
+        for _ in range(n):
             key = zip_draft[zip_draft.find("{")+1: zip_draft.find("}")]
             key_list.append(key)
             split_list.append(

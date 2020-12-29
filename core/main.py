@@ -117,3 +117,7 @@ class TaAssistant(TaAssisDisplay):
 
         # Process 3 - Print the result and ask for job confirmation
         self.__ask_user_to_accept_job_list()
+
+        # Process 4 - Run  all the job
+        for item in self.__job_list.student_data["run_job"]:
+            pass
