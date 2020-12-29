@@ -83,10 +83,10 @@ class TaAssistant(TaAssisDisplay):
         accept_job_menu = Menu({
             "a": ("Accept", lambda: self.__trigger_accept_attribute()),
             "d": ("Decline", lambda: self.__decline_job_list()),
-            "j": ("JobList", lambda: self.report_table("Job List", self.__job_list.student_data["run_job"])),
+            "j": ("JobList", lambda: self.report_table("Job List", [item.generate_dict_report() for item in self.__job_list.jobs])),
             "u": ("UnknownList", lambda: self.report_table("Unknown file Result",
                                                            [{"file_name": item}
-                                                               for item in self.__job_list.invalid_file_name]
+                                                               for item in self.__job_list.unknown_files]
                                                            )),
             "z": ("Zip File Draft", lambda: self.notification("Zip File Draft: " + self.__job_draft["zip_file_draft"], "i")),
             "o": ("Output Draft", lambda: self.notification("Output Draft: " + str(self.__job_draft["output_draft"]), "i"))
@@ -112,11 +112,8 @@ class TaAssistant(TaAssisDisplay):
         # Process 2 - Load file
         self.notification("Loading Job list")
         self.__job_list = JobList(path_to_run, self.__job_draft)
-        self.__job_list.run()
-
-        # Process 3 - recover App state
-        self.__job_list.check_job_done(self.__job_file)
+        self.__job_list.load_jobs(self.__job_file)
         self.subnotification("/", "Job list load successfully")
 
-        # Process 4 - Print the result and ask for job confirmation
+        # Process 3 - Print the result and ask for job confirmation
         self.__ask_user_to_accept_job_list()
