@@ -1,6 +1,7 @@
 from display_module.display_module import TaAssisDisplay
 from display_module.menu import Menu
 from job_list.job_list import JobList
+from file_manager_module.file_manager import FileManager
 import os
 import sys
 import json
@@ -101,6 +102,48 @@ class TaAssistant(TaAssisDisplay):
         self.notification(
             "You've accepted the job list. Starting the job process now.")
 
+    def __add_job_vars(self, job_obj):
+        self.notification("Job vars:")
+        for i in self.__job_draft["output_draft"]:
+            if i in job_obj.job_vars:
+                self.subnotification(
+                    "i", "{0} : {1}".format(i, job_obj.job_vars[i]))
+            else:
+                user_input = self.input_from_user(
+                    "Enter a value for {}: ".format(i))
+                job_obj.add_job_vars(i, user_input)
+
+    def __write_job_vars(self, job_obj):
+        pass
+
+    def __show_job_vars(self, job_obj):
+        data = [job_obj.job_vars]
+        self.report_table("Current job variables", data)
+
+    def __job_vars_input(self, job_obj):
+        manage_job_menu = Menu({
+            "a": ("Add job vars", lambda: self.__add_job_vars(job_obj)),
+            "c": ("Show current job vars", lambda: self.__show_job_vars(job_obj)),
+            "w": ("Write job", lambda: self.__write_job_vars(job_obj)),
+            "s": ("Skip this job", lambda: "s")
+        },
+            "Job management"
+        )
+        while True:
+            manage_job_menu.pick()
+
+    def __run_all_job(self, path_to_run):
+        fm = FileManager
+        job_count = 1
+        for item in self.__job_list.jobs:
+            self.notification("Job ({})".format(job_count))
+            self.subnotification("i", item.file_name)
+            fm.unzip(path_to_run, item.file_name)
+            # os.system(
+            #     "code {0}/ta/cache/{1}".format(path_to_run, item.file_name[:-4]))
+            self.__job_vars_input(item)
+            job_count += 1
+
     def start(self, path_to_run, cli_version):
         # Process 0 - Welcome user
         self.title_message(self.__version, cli_version)
@@ -119,5 +162,4 @@ class TaAssistant(TaAssisDisplay):
         self.__ask_user_to_accept_job_list()
 
         # Process 4 - Run  all the job
-        for item in self.__job_list.student_data["run_job"]:
-            pass
+        self.__run_all_job(path_to_run)

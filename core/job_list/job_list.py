@@ -23,9 +23,6 @@ class JobList:
         self.__jobs_run = []
         self.__unknown_files = []
 
-        # Change name
-        self.__rated_student = []
-
     @property
     def jobs(self):
         """[jobs]
@@ -176,6 +173,12 @@ class Job:
         self.__file_name = file_name
         self.__job_vars = job_vars
         self.__is_run = False
+
+    def add_job_vars(self, key, val):
+        self.__job_vars[key] = val
+
+    def write_job_vars(self):
+        pass
 
     def generate_dict_report(self):
         dict_data = {
