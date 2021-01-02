@@ -18,7 +18,7 @@ class FileManager:
         """
         with ZipFile(path_to_run+"/"+file_name, "r") as zipObj:
             zipObj.extractall(path_to_run +
-                              "/"+"/ta/cache/"+file_name[:-4])
+                              "/ta/cache/" + file_name[:-4])
 
     @staticmethod
     def del_extract(path_to_run, dirname):
