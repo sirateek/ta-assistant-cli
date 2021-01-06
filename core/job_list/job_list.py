@@ -201,3 +201,4 @@ class Job:
     def job_vars(self):
         # The Property of job_vars attribute
         return self.__job_vars
+

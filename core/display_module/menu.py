@@ -25,3 +25,4 @@ class Menu(TaAssisDisplay):
                     "Invalid input. Please input only the char in the Parenthesis")
                 continue
             return self.__menu_item[selection][1]()
+

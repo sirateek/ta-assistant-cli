@@ -65,3 +65,4 @@ class TaAssisDisplay:
         myList.append(['-' * i for i in colSize])
         for item in myList:
             print(formatStr.format(*item))
+
