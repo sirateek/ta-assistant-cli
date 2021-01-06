@@ -1,5 +1,4 @@
 from zipfile import ZipFile
-import os
 import shutil
 
 
@@ -36,3 +35,4 @@ class FileManager:
         shutil.rmtree(path_to_run+"/"+exdirname+"/ta/cache/"+dirname)
 
         print("Directory" + str(dirname) + "Removed")
+
